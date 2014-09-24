@@ -21,6 +21,7 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.light.SpotLight;
+import com.jme3.util.TangentBinormalGenerator;
 
 /**
  *
@@ -78,8 +79,12 @@ public class Main extends SimpleApplication {
     }
     
     private void initScene() {
-        assetManager.registerLocator("town.zip", ZipLocator.class);
-        town = assetManager.loadModel("main.scene");
+        //assetManager.registerLocator("town.zip", ZipLocator.class);
+        //town = assetManager.loadModel("main.scene");
+        
+        town = assetManager.loadModel("Models/Omgeving/Omgeving.j3o");
+        TangentBinormalGenerator.generate(town);
+        town.scale(7f);
         rootNode.attachChild(town);
     }
     
