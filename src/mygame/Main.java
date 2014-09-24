@@ -1,7 +1,6 @@
 package mygame;
 
 import com.jme3.app.SimpleApplication;
-import com.jme3.asset.plugins.ZipLocator;
 import com.jme3.bullet.BulletAppState;
 import com.jme3.bullet.collision.shapes.CapsuleCollisionShape;
 import com.jme3.bullet.collision.shapes.CollisionShape;
@@ -20,7 +19,6 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.math.Vector3f;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import com.jme3.light.SpotLight;
 import com.jme3.util.TangentBinormalGenerator;
 
 /**
@@ -28,9 +26,6 @@ import com.jme3.util.TangentBinormalGenerator;
  * @author Bralts & Hulsman
  */
 public class Main extends SimpleApplication {
-    
-    SpotLight spot = new SpotLight(); 
-
     private Spatial town;
     private BulletAppState bulletAppState;
     private RigidBodyControl landscape;
@@ -54,6 +49,8 @@ public class Main extends SimpleApplication {
         initLight();
         initScene();
         initCollision();
+        initLight();
+        initShadow();
         initPlayer();
         initHUD();
         initKeys();
@@ -93,12 +90,7 @@ public class Main extends SimpleApplication {
         landscape = new RigidBodyControl(townShape, 0);
         town.addControl(landscape);
         bulletAppState.getPhysicsSpace().add(landscape);
-        flyCam.setMoveSpeed(10);
-        Map map = new Map(assetManager);
-        rootNode.attachChild(map);
-        initLight();
-        initShadow();
-        System.out.println("These nodes are in the rootnode : " + rootNode.getChildren());
+        rootNode.attachChild(town);
     }
     
     public void initShadow()
@@ -194,9 +186,6 @@ public class Main extends SimpleApplication {
     
     @Override
     public void simpleUpdate(float tpf) {
-        spot.setDirection(cam.getDirection()); 
-        spot.setPosition(cam.getLocation()); 
-        
         float speed = tpf * 80f;
         camDir.set(cam.getDirection()).multLocal(speed);
         camLeft.set(cam.getLeft()).multLocal(speed);
