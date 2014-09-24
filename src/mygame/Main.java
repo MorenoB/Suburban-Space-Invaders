@@ -96,7 +96,7 @@ public class Main extends SimpleApplication {
         camDir = new Vector3f();
         camLeft = new Vector3f();
         
-        flyCam.setMoveSpeed(50);
+        flyCam.setMoveSpeed(0);
         flyCam.setZoomSpeed(0);
         
         CapsuleCollisionShape capsuleShape = new CapsuleCollisionShape(1.5f, 6f, 1);
@@ -104,7 +104,7 @@ public class Main extends SimpleApplication {
         player.setJumpSpeed(20);
         player.setFallSpeed(30);
         player.setGravity(30);
-        player.setPhysicsLocation(new Vector3f(0, 50f, 0));
+        player.setPhysicsLocation(new Vector3f(0, 15f, 0));
         bulletAppState.getPhysicsSpace().add(player);
         
         rayGun = new Weapon(assetManager, bulletAppState, viewPort);
@@ -175,8 +175,9 @@ public class Main extends SimpleApplication {
     
     @Override
     public void simpleUpdate(float tpf) {
-        camDir.set(cam.getDirection()).multLocal(0.6f);
-        camLeft.set(cam.getLeft()).multLocal(0.4f);
+        float speed = tpf * 80f;
+        camDir.set(cam.getDirection()).multLocal(speed);
+        camLeft.set(cam.getLeft()).multLocal(speed);
         walkDirection.set(0, 0, 0);
 
         if (left) {
