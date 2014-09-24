@@ -1,26 +1,7 @@
-<<<<<<< HEAD
-package mygame;
-
-import com.jme3.scene.Mesh;
-
-/**
- *
- * @author Bralts
- */
-public class Map {
-    public Map()
-    {
-    
-=======
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package mygame;
 
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.util.TangentBinormalGenerator;
@@ -36,18 +17,17 @@ public class Map extends Node{
     Material MapMaterial;
     Spatial MapSpatial;
             
-    public Map(AssetManager assetmanager1)
+    public Map(AssetManager assetmanager)
     {
-         this.assetmanager = assetmanager1;
+         this.assetmanager = assetmanager;
          initObject();
     }
     
     private void initObject()
     {
-    MapSpatial = assetmanager.loadModel("Models/Omgeving/Omgeving.j3o");
-    TangentBinormalGenerator.generate(MapSpatial);
- 
-    this.attachChild(MapSpatial);
->>>>>>> origin/master
+        MapSpatial = assetmanager.loadModel("Models/Omgeving/Omgeving.j3o");
+        TangentBinormalGenerator.generate(MapSpatial);
+
+        this.attachChild(MapSpatial);
     }
 }
